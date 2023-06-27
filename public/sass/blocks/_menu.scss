@@ -1,0 +1,40 @@
+.header.menu--active {
+  // if .header has also menu--active class, menu should be open
+  .header__nav--mobile {
+    opacity: 1;
+    pointer-events: all;
+    visibility: visible;
+  }
+
+  .menu-btn {
+    &--close {
+      display: block;
+    }
+    &--open {
+      display: none;
+    }
+  }
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  width: 50px;
+  z-index: 1000;
+  display: none;
+
+  &--close {
+    display: none;
+  }
+}
+
+.menu__icon {
+  width: 50px;
+}
+
+// 768px
+@media (max-width: 48em) {
+  .menu-btn--open {
+    display: block;
+  }
+}

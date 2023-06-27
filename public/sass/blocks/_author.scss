@@ -1,0 +1,18 @@
+@use "../_vars";
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+
+  &__img {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+
+  &__name {
+    font-size: 1.4rem;
+  }
+}

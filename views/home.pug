@@ -1,0 +1,35 @@
+extends base
+
+mixin cta-first(title, link, href)
+  section.cta.mb-big
+    img.cta__img(src='/img/icons/YQ.svg' alt='YQ')
+    p.cta__message= title
+    a.cta__link--btn(href=`${href}`)= link
+
+block content
+  main
+    if user 
+      +cta-first('Start creating your quizzes', 'Create quiz', '/create-quiz')
+    else
+      +cta-first('Take, create, share quizzes', 'Start now', '/signup')
+    section.quizzes.mb-big
+      h1.quizzes__heading.mb-sm All Ygacs quizzes
+      .divider.mb-md
+      ul.quizzes__grid
+        each quiz in quizzes
+          li.quizzes__li
+            a.quizzes__link(href=`/quizzes/${quiz.slug}`)
+              img.quizzes__card-img(src=`/img/quizzes/${quiz.photo}` alt=`${quiz.name}`)
+              .quizzes__info
+                h3.quizzes__quiz-title= quiz.name
+                p.quizzes__quiz-date= quiz.createdAt.toLocaleString('en-US', {month: 'long', year: 'numeric'}) 
+                .quizzes__tags-container
+                  .tag.tag--main= quiz.tags[0]
+                  .tag.tag--accent= quiz.tags[1]
+    if !user
+      section.cta.mb-big
+        p.cta__message Start your quiz jorney now
+        a.cta__link(href='/signup') Sign up
+        a.cta__extra-link(href='/login')
+          | Already registered? 
+          span Sign in

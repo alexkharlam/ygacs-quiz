@@ -1,0 +1,11 @@
+@keyframes toggleBackground {
+  0% {
+    border-color: vars.$main;
+  }
+  50% {
+    border-color: vars.$accent;
+  }
+  100% {
+    border-color: vars.$main;
+  }
+}

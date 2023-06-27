@@ -1,0 +1,33 @@
+// VARIABLES
+$main: #2196f3;
+$main-light: #5899ff;
+$main-dark: #1976d2;
+
+$accent: #e91e63;
+
+$gray: #616161;
+$gray-light: #757575;
+$gray-light-2: #ededed;
+$gray-dark: #1e1e1e;
+
+$gradient-1: linear-gradient(to right, $main-dark, $main-light);
+$gradient-2: linear-gradient(to right, $accent, $main);
+
+$red: #fa5252;
+$green: #37b24d;
+
+body {
+  margin: 0 auto;
+  padding: 1.2rem;
+
+  max-width: 120rem;
+
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  background-color: #000;
+  color: #fff;
+}
+
+h1 {
+  font-size: 3.2rem;
+}

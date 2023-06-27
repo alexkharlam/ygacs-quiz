@@ -1,0 +1,51 @@
+header.header.mb-big
+  a.header__logo(href='/') Ygacs
+  //- MENU BTNS
+  button(type='button' class='menu-btn menu-btn--open')
+    img.menu__icon(src='/img/icons/menu.svg' alt='menu')
+  button.menu-btn.menu-btn--close(type='button')
+    img.menu__icon(src='/img/icons/close.svg' alt='menu-close')
+  //- header nav DEKSTOP
+  nav.header__nav
+    ul.header__ul
+      li.header__li
+        a.header__link(href='/') Quizzes
+      li.header__li
+        a.header__link(href='/about') About
+      li.header__li
+        a.header__link(href='https://github.com') Github
+  nav.header__nav
+    ul.header__ul
+      if user
+        li.header__li
+          a.header__link.header__link--profile(href='#')
+            img.header__profile-img(src='/img/users/1.jpg' alt='')
+            button.header__logout-btn Logout
+      else
+        li.header__li
+          a.header__link(href='/login') Sign in
+        li.header__li
+          a.header__link.header__link--cta(href='/signup') Sign up
+
+  //- Header nav MOBILE
+  nav.header__nav--mobile
+    ul.header__ul
+      if user
+        li.header__li
+          a.header__link.header__link--profile(href='#')
+            img.header__profile-img(src='/img/users/1.jpg' alt='')
+            button.logout-btn Logout
+      else
+        li.header__li
+          a.header__link(href='#') Sign in
+        li.header__li
+          a.header__link.header__link--cta(href='#') Sign up
+      li.header__li
+        a.header__link(href='#') Quizzes
+      li.header__li
+        a.header__link(href='#') About
+      li.header__li
+        a.header__link(href='#') Github
+
+
+

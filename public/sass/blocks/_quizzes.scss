@@ -1,0 +1,79 @@
+@use '../vars';
+
+.quizzes {
+}
+
+.quizzes__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.4rem;
+}
+
+.quizzes__li {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.quizzes__link {
+}
+
+.quizzes__card-img {
+  max-width: 100%;
+}
+
+.quizzes__info {
+  padding: 1.2rem;
+
+  display: grid;
+  grid-template-columns: auto auto;
+  background-color: #fff;
+  row-gap: 2.4rem;
+  align-items: center;
+}
+
+.quizzes__quiz-title {
+  grid-column: 1/-1;
+  height: 6rem;
+
+  font-size: 2.4rem;
+  line-height: 1.4;
+  font-weight: 700;
+  color: #000;
+}
+
+.quizzes__quiz-date {
+  font-size: 1.4rem;
+  color: vars.$gray;
+  font-weight: 700;
+}
+
+.quizzes__tags-container {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: flex-end;
+}
+
+// 1200px
+@media (max-width: 75em) {
+  .quizzes__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// 820px
+@media (max-width: 52em) {
+  .quizzes__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// 550px
+@media (max-width: 35em) {
+  .quizzes__grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .quizzes__quiz-title {
+    font-size: 3.2rem;
+  }
+}

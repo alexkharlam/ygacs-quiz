@@ -1,0 +1,32 @@
+extends base
+
+block content 
+  main.auth.mb-big
+    section.cta.cta--left-dekstop.mb-big
+      img.cta__img(src='/img/icons/YQ.svg' alt='YQ')
+      p.cta__message Sign up to Ygacs Quiz
+
+    form.auth__form.auth__form--signup
+      label.auth__label(for='name') Name
+      input.auth__input(type='text' id='name' placeholder='Name' required)
+
+      label.auth__label(for='email') Email
+      input.auth__input(type='email' id='email' placeholder='Email' required)
+
+      label.auth__label(for='password') Password
+      input.auth__input(type='password' id='password' placeholder='At least 8 characters' required minlength='8')
+
+      label.auth__label(for='password-confirm') Confirm password
+      input.auth__input(type='password' id='password-confirm' placeholder='At least 8 characters' required minlength='8')
+
+      .auth__checkbox
+        input.auth__input-cb(type='checkbox' id='agree' required)
+        label.auth__label-cb(for='agree') By signing up, I agree to
+          a(href='#') Terms of service and privacy policy
+
+      p.auth__error.hidden 
+      .auth__spinner-container 
+        .spinner
+      button.auth__submit-btn(type='submit') Sign up
+      p.auth__extra-text Already have an account? 
+        a(href='/login') Sign in

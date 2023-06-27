@@ -1,0 +1,52 @@
+@use "../vars";
+
+.cta {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+  align-items: center;
+}
+
+.cta--left {
+  align-items: flex-start;
+}
+
+.cta__img {
+  width: 12rem;
+}
+
+.cta__message {
+  font-size: 2.4rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.cta__link {
+  font-size: 3.2rem;
+  font-weight: 600;
+  color: vars.$main;
+}
+
+.cta__link--btn {
+  padding: 1.6rem 3.2rem;
+
+  font-size: 2.4rem;
+  border-radius: 10px;
+
+  background: vars.$gradient-1;
+  color: #fff;
+}
+
+.cta__extra-link {
+  color: vars.$gray-light;
+  font-size: 1.6rem;
+
+  span {
+    color: vars.$accent;
+  }
+
+  &:hover span {
+    text-decoration: underline;
+  }
+}

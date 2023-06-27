@@ -1,0 +1,24 @@
+@use '../vars';
+
+.popup {
+  position: fixed;
+  z-index: 111111;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 2.4rem;
+  padding: 1.2rem 2.4rem;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  background-color: vars.$accent;
+  &--active {
+    pointer-events: all;
+    opacity: 1;
+    visibility: visible;
+  }
+}

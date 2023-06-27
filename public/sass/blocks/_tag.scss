@@ -1,0 +1,20 @@
+@use "../vars";
+
+.tag {
+  padding: 0.4rem 0.8rem;
+
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  background-color: vars.$gray-light;
+
+  border-radius: 10px;
+}
+
+.tag--main {
+  background-color: vars.$main;
+}
+
+.tag--accent {
+  background-color: vars.$accent;
+}

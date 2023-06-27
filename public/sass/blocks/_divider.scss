@@ -1,0 +1,7 @@
+@use "../vars";
+
+.divider {
+  width: 100%;
+  background-color: vars.$gray-light;
+  height: 1px;
+}

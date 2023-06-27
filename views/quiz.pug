@@ -1,0 +1,13 @@
+extends base
+
+block content
+  main(data-quiz=`${JSON.stringify(quiz)}`)
+    h1.mb-sm= quiz.name
+    .divider.mb-md
+    #question.question.mb-md
+      img.question__img(src='/img/quizzes/1.jpg' alt='')
+      h3.question__name.mb-md= quiz.questions[0].questionTitle
+      each option in quiz.questions[0].options
+        button.question__option-btn(num='0' type='button')= option
+      button.question__next-btn.btn-action.btn-next Next
+

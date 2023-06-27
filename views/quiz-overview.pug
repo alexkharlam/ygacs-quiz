@@ -1,0 +1,25 @@
+extends base
+
+block content 
+  main
+    h1.mb-sm= quiz.name
+    .divider.mb-md
+    .quiz-overview.mb-md
+      img.quiz-overview__img(src=`/img/quizzes/${quiz.photo}` alt='')
+      .quiz-overview__item-container
+        p.quiz-overview__item-name Author:
+        .quiz-overview__item-content.author
+          img.author__img(src=`/img/users/${user.photo}` alt='')
+          p.author__name= user.name
+      .quiz-overview__item-container
+        p.quiz-overview__item-name Tags:
+        .quiz-overview__item-content.quiz-overview__item-content--tags
+          p.tag.tag--main= quiz.tags[0]
+          p.tag.tag--accent= quiz.tags[1]
+      .quiz-overview__item-container
+        p.quiz-overview__item-name Questions:
+        .quiz-overview__item-content--text= quiz.questionsQuantity
+      .quiz-overview__item-container
+        p.quiz-overview__item-name Your rating:
+        .quiz-overview__item-content--text -
+      button.quiz-overview__btn(type='button') Start quiz
