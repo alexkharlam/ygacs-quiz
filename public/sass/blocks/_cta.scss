@@ -1,4 +1,4 @@
-@use "../vars";
+@use '../vars';
 
 .cta {
   display: flex;
@@ -26,16 +26,6 @@
   font-size: 3.2rem;
   font-weight: 600;
   color: vars.$main;
-}
-
-.cta__link--btn {
-  padding: 1.6rem 3.2rem;
-
-  font-size: 2.4rem;
-  border-radius: 10px;
-
-  background: vars.$gradient-1;
-  color: #fff;
 }
 
 .cta__extra-link {

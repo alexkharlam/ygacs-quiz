@@ -7,7 +7,7 @@ block content
     #question.question.mb-md
       img.question__img(src='/img/quizzes/1.jpg' alt='')
       h3.question__name.mb-md= quiz.questions[0].questionTitle
-      each option in quiz.questions[0].options
-        button.question__option-btn(num='0' type='button')= option
+      each option, idx in quiz.questions[0].options
+        button.question__option-btn(num=`${idx}` type='button')= option
       button.question__next-btn.btn-action.btn-next Next
 

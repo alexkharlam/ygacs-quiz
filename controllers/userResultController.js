@@ -18,10 +18,11 @@ export const createResult = catchAsync(async (req, res, next) => {
     q.answer === userAnswers[idx] ? 1 : 0
   );
 
-  const userScore = userScores.reduce(
+  const rightAnswers = userScores.reduce(
     (acc, val) => (val === 1 ? acc + val : acc),
     0
   );
+  const userScore = `${rightAnswers}/${quiz.questions.length}`;
 
   const userResult = await UserResult.create({
     user: req.user._id,

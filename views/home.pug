@@ -4,7 +4,7 @@ mixin cta-first(title, link, href)
   section.cta.mb-big
     img.cta__img(src='/img/icons/YQ.svg' alt='YQ')
     p.cta__message= title
-    a.cta__link--btn(href=`${href}`)= link
+    a.link-btn(href=`${href}`)= link
 
 block content
   main
@@ -18,11 +18,14 @@ block content
       ul.quizzes__grid
         each quiz in quizzes
           li.quizzes__li
-            a.quizzes__link(href=`/quizzes/${quiz.slug}`)
-              img.quizzes__card-img(src=`/img/quizzes/${quiz.photo}` alt=`${quiz.name}`)
+            a.quizzes__link(href=`${user ? `/quizzes/${quiz.slug}` : '/signup'}`)
+              .quizzes__img-container
+                - if (quiz.result || quiz.result === 0)
+                  .quizzes__user-result= quiz.result
+                img.quizzes__card-img(src=`/img/quizzes/${quiz.photo}` alt=`${quiz.name}`)
               .quizzes__info
                 h3.quizzes__quiz-title= quiz.name
-                p.quizzes__quiz-date= quiz.createdAt.toLocaleString('en-US', {month: 'long', year: 'numeric'}) 
+                p.quizzes__quiz-date= quiz.createdAt.toLocaleString('en-US', {month: 'long', year: 'numeric'})
                 .quizzes__tags-container
                   .tag.tag--main= quiz.tags[0]
                   .tag.tag--accent= quiz.tags[1]

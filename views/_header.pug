@@ -1,10 +1,11 @@
 header.header.mb-big
   a.header__logo(href='/') Ygacs
   //- MENU BTNS
-  button(type='button' class='menu-btn menu-btn--open')
-    img.menu__icon(src='/img/icons/menu.svg' alt='menu')
-  button.menu-btn.menu-btn--close(type='button')
-    img.menu__icon(src='/img/icons/close.svg' alt='menu-close')
+  .menu-btns
+    button(type='button' class='menu-btn menu-btn--open')
+      img.menu__icon(src='/img/icons/menu.svg' alt='menu')
+    button.menu-btn.menu-btn--close(type='button')
+      img.menu__icon(src='/img/icons/close.svg' alt='menu-close')
   //- header nav DEKSTOP
   nav.header__nav
     ul.header__ul
@@ -34,7 +35,7 @@ header.header.mb-big
         li.header__li
           a.header__link.header__link--profile(href='#')
             img.header__profile-img(src='/img/users/1.jpg' alt='')
-            button.logout-btn Logout
+            button.header__logout-btn Logout
       else
         li.header__li
           a.header__link(href='#') Sign in

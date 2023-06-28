@@ -1,0 +1,15 @@
+extends base
+
+block content
+  main
+    h1.mb-sm= quiz.name
+    .divider.mb-md
+    .user-result.mb-md
+      p.user-result__title Your score is:
+      p.user-result__score= userResult.score
+      ul.user-result__question-list.mb-md
+        each question, idx in quiz.questions
+          li.user-result__question(class=`user-result__question--${userResult.scores[idx] === 1 ? 'correct' : 'incorrect'}`)
+            p= `${idx + 1} -  ${question.questionTitle}`
+            img(src=`/img/icons/${userResult.scores[idx] === 1 ? '' : 'in'}correct.svg`)
+      a.link-btn.link-btn(href='/') All quizzes

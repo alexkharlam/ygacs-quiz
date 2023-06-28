@@ -7,6 +7,7 @@ import {
   signup,
   getQuizOverview,
   getQuiz,
+  getQuizResult,
 } from '../controllers/viewController.js';
 
 const router = express.Router();
@@ -17,6 +18,7 @@ router.get('/', getQuizzes);
 router.get('/quizzes', getQuizzes);
 router.get('/quizzes/:slug', getQuizOverview);
 router.get('/quizzes/:slug/start', getQuiz);
+router.get('/quizzes/:slug/result/:userAnswers', getQuizResult);
 
 // auth
 router.get('/login', login);

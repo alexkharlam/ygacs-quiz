@@ -26,7 +26,7 @@ const userResultSchema = new mongoose.Schema({
     },
   ],
   score: {
-    type: Number,
+    type: String,
     required: [true, 'Result must have a user score'],
   },
 });

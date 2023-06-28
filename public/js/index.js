@@ -579,10 +579,13 @@ var _auth = require("./auth");
 var _authDefault = parcelHelpers.interopDefault(_auth);
 var _quiz = require("./quiz");
 var _quizDefault = parcelHelpers.interopDefault(_quiz);
+var _menu = require("./menu");
+var _menuDefault = parcelHelpers.interopDefault(_menu);
 (0, _authDefault.default)();
 (0, _quizDefault.default)();
+(0, _menuDefault.default)();
 
-},{"./auth":"ipFHc","./quiz":"6zmfn","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ipFHc":[function(require,module,exports) {
+},{"./auth":"ipFHc","./quiz":"6zmfn","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./menu":"aL8lx"}],"ipFHc":[function(require,module,exports) {
 /* eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const form = document.querySelector(".auth__form");
@@ -677,39 +680,17 @@ exports.export = function(dest, destName, get) {
 },{}],"6zmfn":[function(require,module,exports) {
 /* eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+var _createMarkup = require("./createMarkup");
 exports.default = ()=>{
     const quizString = document.querySelector("main").dataset.quiz;
     if (!quizString) return;
     const quiz = JSON.parse(quizString);
-    console.log(quiz);
     let currentQuestionIdx = 0;
     const userAnswers = [];
     let currentOption = null;
     const questionDOM = document.querySelector(".question");
-    const finishQuiz = async (userAnswers)=>{
-        try {
-            const res = await axios({
-                method: "POST",
-                url: "/api/userResults",
-                data: {
-                    quiz: quiz._id,
-                    answers: userAnswers
-                }
-            });
-            if (res.data.status === "success") console.log(res);
-        } catch (err) {
-            alert(err.response.data.message);
-        }
-    };
-    const createQuestionHTML = (idx, lastQuestion = false)=>{
-        return `
-    ${quiz.questions[idx].image ? `<img src="/img/quizzes/1.jpg" alt="" class="question__img" />` : ""}
-    <h3 class="question__name">${quiz.questions[idx].questionTitle}</h3>
-    ${quiz.questions[idx].options.map((option, idx)=>`
-        <button num="${idx}" class="question__option-btn" type="button">${option}</button>
-        `).join(" ")}
-        <button class="question__next-btn btn-action btn-${lastQuestion ? "finish" : "next"}">${lastQuestion ? "Finish quiz" : "Next question"}</button>
-        `;
+    const finishQuiz = (userAnswers)=>{
+        location.assign(`/quizzes/${quiz.slug}/result/${userAnswers}`);
     };
     const handleCurOption = (target)=>{
         currentOption = +target.getAttribute("num");
@@ -720,7 +701,7 @@ exports.default = ()=>{
     const handleNextQuestion = ()=>{
         ++currentQuestionIdx;
         const isLast = currentQuestionIdx === quiz.questions.length - 1;
-        questionDOM.innerHTML = createQuestionHTML(currentQuestionIdx, isLast);
+        questionDOM.innerHTML = (0, _createMarkup.createQuestionHTML)(quiz, currentQuestionIdx, isLast);
     };
     questionDOM.addEventListener("click", function(e) {
         e.preventDefault();
@@ -733,8 +714,38 @@ exports.default = ()=>{
         if (classes.contains("btn-action") && currentOption !== null) {
             userAnswers.push(currentOption);
             currentOption = null;
+            console.log(userAnswers);
             if (userAnswers.length === quiz.questions.length) finishQuiz(userAnswers);
         }
+    });
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./createMarkup":"gxoLR"}],"gxoLR":[function(require,module,exports) {
+/* eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "createQuestionHTML", ()=>createQuestionHTML);
+const createQuestionHTML = (quiz, idx, lastQuestion = false)=>{
+    return `
+  ${quiz.questions[idx].image ? `<img src="/img/quizzes/1.jpg" alt="" class="question__img" />` : ""}
+  <h3 class="question__name">${quiz.questions[idx].questionTitle}</h3>
+  ${quiz.questions[idx].options.map((option, idx)=>`
+      <button num="${idx}" class="question__option-btn" type="button">${option}</button>
+      `).join(" ")}
+      <button class="question__next-btn btn-action btn-${lastQuestion ? "finish" : "next"}">${lastQuestion ? "Finish quiz" : "Next question"}</button>
+      `;
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aL8lx":[function(require,module,exports) {
+/* eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const menuBtn = document.querySelector(".menu-btns");
+const header = document.querySelector(".header");
+exports.default = ()=>{
+    if (!menuBtn) return;
+    menuBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        console.log("clicked");
+        header.classList.toggle("menu--active");
     });
 };
 

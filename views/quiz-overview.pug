@@ -21,5 +21,8 @@ block content
         .quiz-overview__item-content--text= quiz.questionsQuantity
       .quiz-overview__item-container
         p.quiz-overview__item-name Your rating:
-        .quiz-overview__item-content--text -
-      button.quiz-overview__btn(type='button') Start quiz
+        .quiz-overview__item-content--text-main= quiz.result ? quiz.result : '-'
+      - if (quiz.result || quiz.result === 0)
+        a.link-btn.link-btn--centered(href='/') All quizzes
+      - else
+        a.link-btn.link-btn--centered(href=`/quizzes/${quiz.slug}/start`) Start quiz

@@ -2,6 +2,7 @@ extends base
 
 block content
   .page-error.mb-big 
+    p.page-error__message--sm Oops! Something went wrong: 
     p.page-error__status= statusCode
-    p.page-error__message Oops! Something went wrong: 
     p.page-error__message= message
+    a.link-btn.link-btn(href='/') All quizzes

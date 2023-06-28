@@ -2,15 +2,23 @@
 
 .page-error {
   text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 3.2rem;
+  flex-direction: column;
 
   &__status {
-    font-size: 8rem;
+    font-size: 10rem;
     font-weight: 700;
     color: vars.$accent;
-    margin-bottom: 3.2rem;
   }
 
   &__message {
+    &--sm {
+      font-size: 1.8rem;
+      color: vars.$gray-light;
+    }
+
     font-size: 2rem;
     line-height: 1.5;
   }

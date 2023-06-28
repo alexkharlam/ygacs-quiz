@@ -9,6 +9,10 @@
   .menu-btn {
     &--close {
       display: block;
+      position: fixed;
+      top: 0;
+      right: 0;
+      margin: 1.2rem;
     }
     &--open {
       display: none;
@@ -16,11 +20,14 @@
   }
 }
 
+.menu-btns {
+  z-index: 1010102343210;
+}
+
 .menu-btn {
   background: none;
   border: none;
   width: 50px;
-  z-index: 1000;
   display: none;
 
   &--close {
