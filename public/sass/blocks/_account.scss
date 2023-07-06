@@ -1,0 +1,101 @@
+@use '../vars';
+
+.account {
+}
+
+.account__form {
+  padding: 2.4rem;
+  border-radius: 10px;
+
+  background-color: #fff;
+  color: vars.$gray-dark;
+  max-width: 60rem;
+}
+
+.account__category-title {
+  margin-bottom: 4rem;
+
+  font-size: 3rem;
+}
+
+.account__label {
+  display: block;
+
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.account__input {
+  position: relative;
+  padding: 0.8rem 1.2rem;
+
+  display: block;
+
+  width: 100%;
+
+  color: inherit;
+  font-family: inherit;
+  font-size: 1.6rem;
+  background-color: vars.$gray-light-2;
+  border: none;
+  border-radius: 10px;
+
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.account__input:invalid:focus {
+  outline: none;
+  border-bottom: 3px solid vars.$red;
+}
+
+.account__input:valid:focus {
+  outline: none;
+  border-bottom: 3px solid vars.$green;
+}
+
+.account__submit-btn {
+  padding: 1.2rem 2.4rem;
+
+  width: 100%;
+
+  background-color: vars.$main-dark;
+  border: none;
+  border-radius: 10px;
+
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: vars.$main;
+  }
+}
+
+.account__photo-block {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.account__photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.account__btns-container {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.account__delete-confirmation {
+  color: vars.$red;
+  font-size: 1.6rem;
+}

@@ -1,7 +1,9 @@
 import auth from './auth';
-import quiz from './quiz';
 import menu from './menu';
+import quiz from './quiz';
+import updateUser from './updateUser';
 
 auth();
 quiz();
 menu();
+updateUser();

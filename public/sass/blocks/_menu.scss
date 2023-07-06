@@ -22,6 +22,7 @@
 
 .menu-btns {
   z-index: 1010102343210;
+  display: none;
 }
 
 .menu-btn {
@@ -41,6 +42,9 @@
 
 // 768px
 @media (max-width: 48em) {
+  .menu-btns {
+    display: block;
+  }
   .menu-btn--open {
     display: block;
   }

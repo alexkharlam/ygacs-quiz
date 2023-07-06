@@ -6,6 +6,8 @@ import {
   updatePassword,
   getMe,
   updateMe,
+  resizeImage,
+  uploadUserPhoto,
 } from '../controllers/userController.js';
 
 const router = express.Router();
@@ -13,7 +15,7 @@ const router = express.Router();
 router.use(protect);
 
 router.get('/me', getMe);
-router.patch('/updateMe', updateMe);
+router.patch('/updateMe', uploadUserPhoto, resizeImage, updateMe);
 router.patch('/updatePassword', updatePassword);
 router.delete('/deleteMe', deleteAccount);
 

@@ -19,9 +19,9 @@ header.header.mb-big
     ul.header__ul
       if user
         li.header__li
-          a.header__link.header__link--profile(href='#')
-            img.header__profile-img(src='/img/users/1.jpg' alt='')
-            button.header__logout-btn Logout
+          a.header__link.header__link--profile(href='/account')
+            img.header__profile-img(src=`/img/users/${user.photo}` alt='')
+            p Profile
       else
         li.header__li
           a.header__link(href='/login') Sign in
@@ -33,9 +33,9 @@ header.header.mb-big
     ul.header__ul
       if user
         li.header__li
-          a.header__link.header__link--profile(href='#')
-            img.header__profile-img(src='/img/users/1.jpg' alt='')
-            button.header__logout-btn Logout
+          a.header__link.header__link--profile(href='/account')
+            img.header__profile-img(src=`/img/users/${user.photo}` alt='')
+            p Profile
       else
         li.header__li
           a.header__link(href='#') Sign in

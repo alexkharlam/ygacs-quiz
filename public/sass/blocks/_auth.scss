@@ -68,6 +68,10 @@
   box-sizing: border-box;
 }
 
+.auth__title {
+  font-size: 3rem;
+}
+
 .auth__input:invalid:focus {
   outline: none;
   border-bottom: 3px solid vars.$red;
@@ -129,8 +133,11 @@
   font-size: 1.6rem;
 
   a {
-    color: vars.$main;
+    color: vars.$main-dark;
     font-weight: 700;
+    &:hover {
+      color: vars.$main;
+    }
   }
 }
 

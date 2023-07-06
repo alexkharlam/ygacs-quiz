@@ -44,34 +44,42 @@
   color: inherit;
   font-size: 1.6rem;
   display: block;
+  transition: transform 0.2s;
+
+  &:hover {
+    color: vars.$main;
+  }
 
   &--cta {
     padding: 1.2rem 2rem;
     background: vars.$gradient-1;
     border-radius: 10px;
+    &:hover {
+      transform: scale(1.02);
+      color: inherit;
+    }
   }
 
   &--profile {
     display: flex;
-    gap: 2.4rem;
+    gap: 1.2rem;
     align-items: center;
+    border: 3px solid transparent;
+    padding: 0.2rem;
+    border-radius: 10px;
+
+    &:hover {
+      color: inherit;
+      border: 3px solid vars.$main;
+    }
   }
 }
 
 .header__profile-img {
-  width: 4.5rem;
+  width: 3.8rem;
   border-radius: 1111px;
-}
-
-.header__logout-btn {
-  background-color: vars.$accent;
-  border: none;
-  color: #fff;
-  padding: 0.4rem 0.8rem;
-  border-radius: 10px;
-
-  &:hover {
-  }
+  transition: all 0.2s;
+  border: 3px solid transparent;
 }
 
 // 768PX

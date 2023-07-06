@@ -1,0 +1,39 @@
+extends base
+
+block content
+  main
+    h1.mb-md My profile
+    .account.mb-md
+      form#update__data-form.auth__form.mb-md
+        h3.auth__title.mb-md Update my data
+        label.auth__label.mb-sm(for='update__name') Name
+        input#update__name.auth__input.mb-md(type='text' value=`${user.name}`)
+        label.auth__label.mb-sm(for='update__email') E-mail
+        input#update__email.auth__input.mb-md(type='email' value=`${user.email}`)
+        .account__photo-block.mb-md
+          img.account__photo(src=`/img/users/${user.photo}` alt='user')
+          div
+            label.auth__label.mb-sm(for='update__photo') Choose new photo
+            input#update__photo.account__photo-input(type='file' accept='image/*' name='photo')
+        p.auth__error.hidden 
+        .auth__spinner-container 
+          .spinner    
+        button.auth__submit-btn(type='submit') Confirm
+      form#update__password-form.auth__form.mb-md
+        h3.auth__title.mb-md Update password
+        label.auth__label.mb-sm(for='update__password') Old password
+        input#update__password.auth__input.mb-md(type='password' minlength='8' required)
+        label.auth__label.mb-sm(for='update__new-password') New password
+        input#update__new-password.auth__input.mb-md(type='password' minlength='8' required)
+        label.auth__label.mb-sm(for='update__new-password-confirm') Confirm new password
+        input#update__new-password-confirm.auth__input.mb-md(type='password' minlength='8' required)
+        p.auth__error.hidden 
+        .auth__spinner-container 
+          .spinner    
+        button.auth__submit-btn(type='submit') Confirm
+      .account__btns-container
+        button#logout-btn.link-btn.link-btn--accent.link-btn--sm Logout
+        button#delete-account-btn.link-btn.link-btn--red.link-btn--sm Delete account
+        p#delete-account-confirmation.account__delete-confirmation.hidden Click again to delete account
+
+        

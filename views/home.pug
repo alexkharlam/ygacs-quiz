@@ -9,7 +9,8 @@ mixin cta-first(title, link, href)
 block content
   main
     if user 
-      +cta-first('Start creating your quizzes', 'Create quiz', '/create-quiz')
+      //- +cta-first('Start creating your quizzes', 'Create quiz', '/create-quiz')
+      //- Creating quiz functinoality is in TODO: stage
     else
       +cta-first('Take, create, share quizzes', 'Start now', '/signup')
     section.quizzes.mb-big

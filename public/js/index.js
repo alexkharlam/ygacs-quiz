@@ -142,13 +142,12 @@
       this[globalName] = mainExports;
     }
   }
-})({"iTHkB":[function(require,module,exports) {
-var global = arguments[3];
+})({"3nE2V":[function(require,module,exports) {
 var HMR_HOST = null;
 var HMR_PORT = 1234;
 var HMR_SECURE = false;
-var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "19a6311c1f2c864c";
+var HMR_ENV_HASH = "b8e5beffa3b6ddc5";
+module.bundle.HMR_BUNDLE_ID = "ba3cce8f5e9089e8";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -573,81 +572,117 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
     });
 }
 
-},{}],"5Rmzt":[function(require,module,exports) {
+},{}],"8j3R2":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _auth = require("./auth");
 var _authDefault = parcelHelpers.interopDefault(_auth);
-var _quiz = require("./quiz");
-var _quizDefault = parcelHelpers.interopDefault(_quiz);
 var _menu = require("./menu");
 var _menuDefault = parcelHelpers.interopDefault(_menu);
+var _quiz = require("./quiz");
+var _quizDefault = parcelHelpers.interopDefault(_quiz);
+var _updateUser = require("./updateUser");
+var _updateUserDefault = parcelHelpers.interopDefault(_updateUser);
 (0, _authDefault.default)();
 (0, _quizDefault.default)();
 (0, _menuDefault.default)();
+(0, _updateUserDefault.default)();
 
-},{"./auth":"ipFHc","./quiz":"6zmfn","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./menu":"aL8lx"}],"ipFHc":[function(require,module,exports) {
+},{"./auth":"8nIq0","./menu":"gPpQu","./quiz":"2Z4CA","./updateUser":"ujQnO","@parcel/transformer-js/src/esmodule-helpers.js":"5Birt"}],"8nIq0":[function(require,module,exports) {
 /* eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-const form = document.querySelector(".auth__form");
-const formErr = document.querySelector(".auth__error");
-const logoutBtn = document.querySelector(".header__logout-btn");
-const makeAuthRequest = async (data, type = "login")=>{
-    form.classList.add("auth__form--loading");
-    formErr.classList.remove("hidden");
-    try {
-        const res = await axios({
-            method: "POST",
-            url: `/api/auth/${type === "login" ? "login" : "signup"}`,
-            data
-        });
-        if (res.data.status === "success") {
-            form.classList.remove("auth__form--loading");
-            setTimeout(()=>location.assign("/"), 200);
-        }
-    } catch (err) {
-        form.classList.remove("auth__form--loading");
-        formErr.textContent = err.response.data.message;
-        formErr.classList.remove("hidden");
-    }
-};
+var _http = require("./http");
+const form = document.getElementById("auth__form");
+const logoutBtn = document.getElementById("logout-btn");
+const deleteAccountBtn = document.getElementById("delete-account-btn");
+const deleteAccountText = document.getElementById("delete-account-confirmation");
 exports.default = ()=>{
-    if (logoutBtn) logoutBtn.addEventListener("click", async function(e) {
+    if (deleteAccountBtn) deleteAccountBtn.addEventListener("click", function(e) {
         e.preventDefault();
-        try {
-            const res = await axios({
-                method: "GET",
-                url: "/api/auth/logout"
-            });
-            if (res.data.status === "success") setTimeout(()=>{
-                location.assign("/");
-            }, 200);
-        } catch (err) {
-            alert(err.response.data.message);
-        }
+        deleteAccountText.classList.remove("hidden");
+        deleteAccountBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            (0, _http.deleteAccountRequest)();
+        });
     });
+    if (logoutBtn) logoutBtn.addEventListener("click", (e)=>(0, _http.makeLogoutRequest)());
     if (!form) return;
     form.addEventListener("submit", function(e) {
         e.preventDefault();
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
-        if (e.target.classList.contains("auth__form--login")) makeAuthRequest({
-            email,
-            password
-        }, "login");
+        if (e.target.classList.contains("auth__form--login")) {
+            const body = {
+                email,
+                password
+            };
+            (0, _http.makeFormRequest)(e.target, "POST", "/api/auth/login", body, true);
+        }
         if (e.target.classList.contains("auth__form--signup")) {
             const name = document.getElementById("name").value;
             const passwordConfirm = document.getElementById("password-confirm").value;
-            makeAuthRequest({
+            const body = {
                 name,
                 email,
                 password,
                 passwordConfirm
-            }, "signup");
+            };
+            (0, _http.makeFormRequest)(e.target, "POST", "/api/auth/signup", body, true);
         }
     });
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+},{"./http":"czwS4","@parcel/transformer-js/src/esmodule-helpers.js":"5Birt"}],"czwS4":[function(require,module,exports) {
+/* eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "deleteAccountRequest", ()=>deleteAccountRequest);
+parcelHelpers.export(exports, "makeLogoutRequest", ()=>makeLogoutRequest);
+parcelHelpers.export(exports, "makeFormRequest", ()=>makeFormRequest);
+const deleteAccountRequest = async ()=>{
+    try {
+        const res = await axios({
+            method: "DELETE",
+            url: "api/user/deleteMe"
+        });
+        if (res.status === 204) setTimeout(()=>location.assign("/"), 200);
+    } catch (err) {
+        alert(err.response.data.message);
+    }
+};
+const makeLogoutRequest = async ()=>{
+    try {
+        const res = await axios({
+            method: "GET",
+            url: "/api/auth/logout"
+        });
+        if (res.data.status === "success") setTimeout(()=>{
+            location.assign("/");
+        }, 200);
+    } catch (err) {
+        alert(err.response.data.message);
+    }
+};
+const makeFormRequest = async (formDOM, method, url, data, toHomePage = false)=>{
+    formDOM.classList.add("auth__form--loading");
+    const errDOM = formDOM.querySelector(".auth__error");
+    errDOM.classList.add("hidden");
+    try {
+        const res = await axios({
+            method,
+            url,
+            data
+        });
+        if (res.data.status === "success") setTimeout(()=>{
+            if (toHomePage) location.assign("/");
+            else location.reload(true);
+        }, 200);
+    } catch (err) {
+        formDOM.classList.remove("auth__form--loading");
+        errDOM.textContent = err.response.data.message;
+        errDOM.classList.remove("hidden");
+    }
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5Birt"}],"5Birt":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -677,7 +712,21 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"6zmfn":[function(require,module,exports) {
+},{}],"gPpQu":[function(require,module,exports) {
+/* eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const menuBtn = document.querySelector(".menu-btns");
+const header = document.querySelector(".header");
+exports.default = ()=>{
+    if (!menuBtn) return;
+    menuBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        console.log("clicked");
+        header.classList.toggle("menu--active");
+    });
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5Birt"}],"2Z4CA":[function(require,module,exports) {
 /* eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _createMarkup = require("./createMarkup");
@@ -720,7 +769,7 @@ exports.default = ()=>{
     });
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./createMarkup":"gxoLR"}],"gxoLR":[function(require,module,exports) {
+},{"./createMarkup":"dFie0","@parcel/transformer-js/src/esmodule-helpers.js":"5Birt"}],"dFie0":[function(require,module,exports) {
 /* eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "createQuestionHTML", ()=>createQuestionHTML);
@@ -735,20 +784,36 @@ const createQuestionHTML = (quiz, idx, lastQuestion = false)=>{
       `;
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aL8lx":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5Birt"}],"ujQnO":[function(require,module,exports) {
 /* eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-const menuBtn = document.querySelector(".menu-btns");
-const header = document.querySelector(".header");
+var _http = require("./http");
+const dataForm = document.getElementById("update__data-form");
+const passwordForm = document.getElementById("update__password-form");
 exports.default = ()=>{
-    if (!menuBtn) return;
-    menuBtn.addEventListener("click", function(e) {
-        e.preventDefault();
-        console.log("clicked");
-        header.classList.toggle("menu--active");
-    });
+    if (dataForm) {
+        dataForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const processedform = new FormData();
+            processedform.append("name", document.getElementById("update__name").value);
+            processedform.append("email", document.getElementById("update__email").value);
+            processedform.append("photo", document.getElementById("update__photo").files[0]);
+            (0, _http.makeFormRequest)(dataForm, "PATCH", "/api/user/updateMe", processedform);
+        });
+        if (passwordForm) passwordForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const oldPassword = document.getElementById("update__password").value;
+            const password = document.getElementById("update__new-password").value;
+            const passwordConfirm = document.getElementById("update__new-password-confirm").value;
+            (0, _http.makeFormRequest)(passwordForm, "PATCH", "/api/user/updatePassword", {
+                oldPassword,
+                password,
+                passwordConfirm
+            });
+        });
+    }
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["iTHkB","5Rmzt"], "5Rmzt", "parcelRequire76d7")
+},{"./http":"czwS4","@parcel/transformer-js/src/esmodule-helpers.js":"5Birt"}]},["3nE2V","8j3R2"], "8j3R2", "parcelRequire76d7")
 
 //# sourceMappingURL=index.js.map

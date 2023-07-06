@@ -8,6 +8,10 @@ const quizSchema = new mongoose.Schema({
   },
   slug: String,
   author: { type: mongoose.Schema.ObjectId, ref: 'User' },
+  onModeration: {
+    type: Boolean,
+    default: true,
+  },
   photo: String,
   createdAt: { type: Date, default: Date.now },
   tags: [{ type: String, enum: ['music', 'cinema', 'it', 'new'] }],
@@ -41,6 +45,13 @@ quizSchema.pre('save', function (next) {
 
   this.slug = slugify(this.name);
   this.questionsQuantity = this.questions.length;
+
+  next();
+});
+
+quizSchema.pre(/^find/, function (next) {
+  // this points to the current query
+  this.find({ onModeration: { $ne: true } }); // updating the query by removing inactive users
 
   next();
 });

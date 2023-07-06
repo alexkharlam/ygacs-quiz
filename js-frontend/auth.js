@@ -1,69 +1,50 @@
 /* eslint-disable */
-const form = document.querySelector('.auth__form');
-const formErr = document.querySelector('.auth__error');
-
-const logoutBtn = document.querySelector('.header__logout-btn');
-
-const makeAuthRequest = async (data, type = 'login') => {
-  form.classList.add('auth__form--loading');
-  formErr.classList.remove('hidden');
-
-  try {
-    const res = await axios({
-      method: 'POST',
-      url: `/api/auth/${type === 'login' ? 'login' : 'signup'}`,
-      data,
-    });
-
-    if (res.data.status === 'success') {
-      form.classList.remove('auth__form--loading');
-
-      setTimeout(() => location.assign('/'), 200);
-    }
-  } catch (err) {
-    form.classList.remove('auth__form--loading');
-    formErr.textContent = err.response.data.message;
-    formErr.classList.remove('hidden');
-  }
-};
+import {
+  makeFormRequest,
+  makeLogoutRequest,
+  deleteAccountRequest,
+} from './http';
+const form = document.getElementById('auth__form');
+const logoutBtn = document.getElementById('logout-btn');
+const deleteAccountBtn = document.getElementById('delete-account-btn');
+const deleteAccountText = document.getElementById(
+  'delete-account-confirmation'
+);
 
 export default () => {
-  if (logoutBtn) {
-    logoutBtn.addEventListener('click', async function (e) {
+  if (deleteAccountBtn) {
+    deleteAccountBtn.addEventListener('click', function (e) {
       e.preventDefault();
 
-      try {
-        const res = await axios({
-          method: 'GET',
-          url: '/api/auth/logout',
-        });
+      deleteAccountText.classList.remove('hidden');
 
-        if (res.data.status === 'success') {
-          setTimeout(() => {
-            location.assign('/');
-          }, 200);
-        }
-      } catch (err) {
-        alert(err.response.data.message);
-      }
+      deleteAccountBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        deleteAccountRequest();
+      });
     });
   }
 
-  if (!form) return;
+  if (logoutBtn)
+    logoutBtn.addEventListener('click', (e) => makeLogoutRequest());
 
+  if (!form) return;
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
     if (e.target.classList.contains('auth__form--login')) {
-      makeAuthRequest({ email, password }, 'login');
+      const body = { email, password };
+      makeFormRequest(e.target, 'POST', '/api/auth/login', body, true);
     }
 
     if (e.target.classList.contains('auth__form--signup')) {
       const name = document.getElementById('name').value;
       const passwordConfirm = document.getElementById('password-confirm').value;
-      makeAuthRequest({ name, email, password, passwordConfirm }, 'signup');
+      const body = { name, email, password, passwordConfirm };
+      makeFormRequest(e.target, 'POST', '/api/auth/signup', body, true);
     }
   });
 };

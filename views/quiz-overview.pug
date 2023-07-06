@@ -9,8 +9,8 @@ block content
       .quiz-overview__item-container
         p.quiz-overview__item-name Author:
         .quiz-overview__item-content.author
-          img.author__img(src=`/img/users/${user.photo}` alt='')
-          p.author__name= user.name
+          img.author__img(src=`/img/users/${quiz.author.photo}` alt='')
+          p.author__name= quiz.author.name
       .quiz-overview__item-container
         p.quiz-overview__item-name Tags:
         .quiz-overview__item-content.quiz-overview__item-content--tags

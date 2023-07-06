@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
 import Quiz from '../models/quizModel.js';
+import User from '../models/userModel.js';
 import UserResult from '../models/userResultModel.js';
 import catchAsync from '../utils/catchAsync.js';
 
@@ -115,6 +115,18 @@ export const getQuizResult = catchAsync(async (req, res, next) => {
     title: 'title',
     quiz,
     userResult,
+  });
+});
+
+export const getAccount = catchAsync(async (req, res, next) => {
+  if (!req.user) return next(new AppError('You are not logged in', 401));
+
+  const user = await User.findById(req.user._id);
+  console.log(user);
+
+  res.status(200).render('account', {
+    title: 'Account',
+    user,
   });
 });
 
