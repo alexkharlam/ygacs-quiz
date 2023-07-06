@@ -1,9 +1,9 @@
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 
 import app from './app.js';
 import connectDB from './middleware/connectDB.js';
 
-dotenv.config({ path: 'process.env' });
+// dotenv.config({ path: 'process.env' });
 
 //
 
