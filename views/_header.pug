@@ -10,11 +10,11 @@ header.header.mb-big
   nav.header__nav
     ul.header__ul
       li.header__li
-        a.header__link(href='/') Quizzes
+        a.header__link(href='/') Home
       li.header__li
         a.header__link(href='/about') About
       li.header__li
-        a.header__link(href='https://github.com') Github
+        a.header__link(href='https://github.com/alexkharlam' target='_blank') Github
   nav.header__nav
     ul.header__ul
       if user
@@ -38,15 +38,15 @@ header.header.mb-big
             p Profile
       else
         li.header__li
-          a.header__link(href='#') Sign in
+          a.header__link(href='/login') Sign in
         li.header__li
-          a.header__link.header__link--cta(href='#') Sign up
+          a.header__link.header__link--cta(href='/signup') Sign up
       li.header__li
-        a.header__link(href='#') Quizzes
+        a.header__link(href='/') Quizzes
       li.header__li
-        a.header__link(href='#') About
+        a.header__link(href='/about') About
       li.header__li
-        a.header__link(href='#') Github
+        a.header__link(href='https://github.com/alexkharlam' target='_blank') Github
 
 
 

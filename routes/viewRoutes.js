@@ -7,6 +7,7 @@ import {
   signup,
   getQuizOverview,
   getAccount,
+  getAbout,
   getQuiz,
   getQuizResult,
 } from '../controllers/viewController.js';
@@ -24,5 +25,7 @@ router.get('/quizzes/:slug/result/:userAnswers', getQuizResult);
 // auth
 router.get('/login', login);
 router.get('/signup', signup);
+
+router.get('/about', getAbout);
 
 export default router;

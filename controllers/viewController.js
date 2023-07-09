@@ -145,3 +145,9 @@ export const signup = catchAsync(async (req, res, next) => {
     title: 'Sign up',
   });
 });
+
+export const getAbout = catchAsync(async (req, res, next) => {
+  res.status(200).render('about', {
+    title: 'About',
+  });
+});
