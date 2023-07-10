@@ -50,7 +50,7 @@ const sendErrorProd = (err, req, res) => {
 
   // error is NOT API and OPERATIONAL
   if (!err.isApiErr && err.isOperational) {
-    res.status(err.statusCode).render({
+    res.status(err.statusCode).render('error', {
       title: err.message,
       message: err.message,
       statusCode: err.statusCode,
@@ -59,7 +59,7 @@ const sendErrorProd = (err, req, res) => {
 
   // error is NOT API and NOT OPERATIONAL
   if (!err.isApiErr && !err.isOperational) {
-    res.status(500).render({
+    res.status(500).render('error', {
       title: 'Something went wrong!',
       message: 'Please try again later 😴',
       statusCode: 500,
