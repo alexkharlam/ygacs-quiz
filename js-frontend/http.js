@@ -56,7 +56,9 @@ export const makeFormRequest = async (
       }, 200);
   } catch (err) {
     formDOM.classList.remove('auth__form--loading');
-    errDOM.textContent = err.response.data.message;
     errDOM.classList.remove('hidden');
+    console.log(errDOM);
+    console.log(err);
+    errDOM.textContent = err.response.data.message;
   }
 };
