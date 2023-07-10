@@ -44,7 +44,6 @@ const sendErrorProd = (err, req, res) => {
     res.status(500).json({
       status: 'error',
       message: 'Something went wrong! Try again later',
-      errorTemp: err,
     });
   }
 
@@ -75,14 +74,12 @@ export default (err, req, res, next) => {
   // error handling depends on current enviroment
   if (env === 'development') return sendErrorDev(err, req, res);
   if (env === 'production') {
-    let newError = { ...err };
+    if (err.name === 'CastError') err = castError(err);
+    if (err.name === 'ValidationError') err = validationError(err);
+    if (err.code === 11000) err = dublicateFields(err);
+    if (err.name === 'JsonWebTokenError') err = jwtError(err);
+    if (err.name === 'TokenExpiredError') err = jwtExpiredError(err);
 
-    if (err.name === 'CastError') newError = castError(err);
-    if (err.name === 'ValidationError') newError = validationError(err);
-    if (err.code === 11000) newError = dublicateFields(err);
-    if (err.name === 'JsonWebTokenError') newError = jwtError(err);
-    if (err.name === 'TokenExpiredError') newError = jwtExpiredError(err);
-
-    return sendErrorProd(newError, req, res);
+    return sendErrorProd(err, req, res);
   }
 };
