@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "watch:js": "parcel watch ./js-frontend/index.js --dist-dir ./public/js"
+    "watch:js": "parcel watch ./js-frontend/index.js --dist-dir ./public/js",
+    "build:js": "parcel build ./js-frontend/index.js --dist-dir ./public/js"
   },
   "author": "Alex Kharlamov",
   "license": "MIT",
