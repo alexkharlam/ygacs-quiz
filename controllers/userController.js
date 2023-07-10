@@ -1,5 +1,5 @@
-import sharp from 'sharp';
 import multer from 'multer';
+import sharp from 'sharp';
 
 import User from '../models/userModel.js';
 import catchAsync from '../utils/catchAsync.js';
