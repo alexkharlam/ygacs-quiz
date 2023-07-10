@@ -53,7 +53,7 @@ To run this project, you will need to add the following environment variables to
 
 `PORT` - The port on which the server will run. If no port is specified, the application will default to using port 3000.
 
-`DB` - This variable should contain the connection string for MongoDB. Instead of including the user and password directly in the string, use the format `<USER:PASSWORD>`.
+`DB` - Project requires a database. This variable should contain the connection string for MongoDB. Instead of including the user and password directly in the string, use the format `<USER:PASSWORD>`.
 
 Example of `DB` variable:
 `mongodb+srv://<USER:PASSWORD>@cluster0.dsyfuih.mongodb.net/ygacs-quiz?retryWrites=true&w=majority`
